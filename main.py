@@ -58,12 +58,12 @@ def get_station_data_dataframe(station_id):
         _data_cache[cache_key] = _preprocess_dataframe(df)
     return _data_cache[cache_key]
 
-# Încărcăm lista de stații la pornire
+# We load the list of stations at startup
 df_station = get_stations_dataframe()
 
 @app.route("/")
 def home():
-    # Afișăm pe prima pagină tabelul cu stațiile
+    # We display the table of stations on the front page
     return render_template("home.html", 
                            data=df_station[["STAID", "STANAME"]].to_html())
 
@@ -86,7 +86,7 @@ def api(station, date):
         temperature = "N/A" # No data for this specific date
     else:
         temperature = date_df["TG"].squeeze()
-        # Daca sunt mai multe inregistrari (n-ar trebui), luam prima valoare
+        # If there are multiple records (shouldn't happen), take the first value
         if isinstance(temperature, pd.Series):
              temperature = temperature.iloc[0]
 
