@@ -3,7 +3,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/weather-data-api', '.']
 
-  # Step 2: Uploading the image to Artifact/Container Registry
+  # Step 2: Uploading the image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/weather-data-api']
 
